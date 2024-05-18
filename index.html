@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pesquisa de Produtos</h1>
+    <input type="text" id="searchInput" placeholder="Digite para pesquisar...">
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Referência</th>
+                <th>Preço Venda</th>
+                <th>Preço Revenda</th>
+                <th>Quantidade</th>
+                <th>Código de Barras</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os resultados da pesquisa serão inseridos aqui -->
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
