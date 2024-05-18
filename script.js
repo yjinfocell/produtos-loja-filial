@@ -6,17 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const csvData = `
 Produto,Referência,Preço venda,Preço revenda,Qtde,Cód. barras
 KV-257 CABO DE SAQUINHO IPHONE,KV-257,"3,5",8,0,7898070364688
-Produto 2,REF002,"20,0",15,0,1234567890124
-Produto 3,REF003,"15,0",12,0,1234567890125
-Produto 4,REF004,"25,0",20,0,1234567890126
+Produto 2,REF002,"20,00",15,50,1234567890124
+Produto 3,REF003,"15,00",12,75,1234567890125
+Produto 4,REF004,"25,00",20,30,1234567890126
 `.trim();
 
     // Função para carregar dados CSV e tratar vírgulas nos preços
     function parseCSV(data) {
-        // Regex para capturar valores entre aspas
-        const regex = /(".*?"|[^",\s]+)(?=\s*,|\s*$)/g;
         return data.split('\n').map(row => {
-            return [...row.matchAll(regex)].map(match => match[0].replace(/(^"|"$)/g, '').replace(',', '.'));
+            const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            return columns.map(column => column.replace(/(^"|"$)/g, '').replace(',', '.'));
         });
     }
 
@@ -45,4 +44,6 @@ Produto 4,REF004,"25,0",20,0,1234567890126
     const products = parseCSV(csvData);
     displayResults(products);
 
-    // Adiciona o evento de input para
+    // Adiciona o evento de input para a pesquisa
+    searchInput.addEventListener('input', searchProducts);
+});
