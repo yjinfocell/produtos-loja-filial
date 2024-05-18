@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
 
-    // Dados CSV como variável JavaScript
     const csvData = `
 Produto,Referência,Preço venda,Preço revenda,Qtde,Cód. barras
 KV-257 CABO DE SAQUINHO IPHONE,KV-257,"3,5",8,0,7898070364688
@@ -11,15 +10,13 @@ Produto 3,REF003,"15,00",12,75,1234567890125
 Produto 4,REF004,"25,00",20,30,1234567890126
 `.trim();
 
-    // Função para carregar dados CSV e tratar vírgulas nos preços
     function parseCSV(data) {
         return data.split('\n').map(row => {
-            const columns = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-            return columns.map(column => column.replace(/(^"|"$)/g, '').replace(',', '.'));
+            const columns = row.split(',');
+            return columns.map(column => column.trim().replace(/(^"|"$)/g, '').replace(',', '.'));
         });
     }
 
-    // Função para exibir resultados na tabela
     function displayResults(data) {
         resultsTable.innerHTML = '';
         data.forEach(row => {
@@ -33,17 +30,14 @@ Produto 4,REF004,"25,00",20,30,1234567890126
         });
     }
 
-    // Função de pesquisa
     function searchProducts(event) {
         const query = event.target.value.toLowerCase();
         const filteredData = products.filter(row => row.some(cell => cell.toLowerCase().includes(query)));
         displayResults(filteredData);
     }
 
-    // Carrega os dados CSV e inicializa a pesquisa
     const products = parseCSV(csvData);
     displayResults(products);
 
-    // Adiciona o evento de input para a pesquisa
     searchInput.addEventListener('input', searchProducts);
 });
