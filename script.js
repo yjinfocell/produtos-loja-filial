@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para carregar dados CSV
     async function loadCSV() {
         const response = await fetch('produtos.csv');
-        const data = await response.text();
-        return data.split('\n').map(row => row.split(','));
+        const text = await response.text();
+
+        // Parse CSV usando csv-parse
+        const { parse } = require('csv-parse/lib/sync');
+        return parse(text, { columns: false, delimiter: ',' });
     }
 
     // Função para exibir resultados na tabela
